@@ -157,3 +157,15 @@ struct X1 {
   X1(Args... args) : inner{args...} {};
 };
 
+template <typename... Args>
+auto new_print(Args... args) -> void {
+  std::println("{}", args...);
+}
+
+template <typename T, std::size_t N>
+class myarray {
+  T arr[N];
+};
+
+template <typename T, typename... Args>
+myarray(T, Args...) -> myarray<std::enable_if_t<(std::is_same_v<T, Args>&& ...), T>, sizeof... (Args) + 1>;

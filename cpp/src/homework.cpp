@@ -27,19 +27,19 @@ auto htest1() -> void {
 
 // 2. 实现自定义字面量
 
-constexpr auto operator""_f(const char* fmt, std::size_t) {
-  return [=]<typename... T>(T&&... args) {
-    return std::vformat(fmt, std::make_format_args(std::forward<T>(args)...));
-  };
-}
-
-auto htest2() -> void {
-  std::cout << "乐 :{} *\n"_f(5);
-  std::cout << "乐 :{0} {0} *\n"_f(5);
-  std::cout << "乐 :{:b} *\n"_f(0b01010101);
-  std::cout << "{:*<10}"_f("小黄");
-  std::cout << '\n';
-  int n{};
-  std::cin >> n;
-  std::cout << "π：{:.{}f}\n"_f(std::numbers::pi_v<double>, n);
-}
+// constexpr auto operator""_f(const char* fmt, std::size_t) {
+//   return [=]<typename... T>(T&&... args) {
+//     return std::vformat(fmt, std::make_format_args(std::forward<T>(args)...));
+//   };
+// }
+//
+// auto htest2() -> void {
+//   std::cout << "乐 :{} *\n"_f(5);
+//   std::cout << "乐 :{0} {0} *\n"_f(5);
+//   std::cout << "乐 :{:b} *\n"_f(0b01010101);
+//   std::cout << "{:*<10}"_f("小黄");
+//   std::cout << '\n';
+//   int n{};
+//   std::cin >> n;
+//   std::cout << "π：{:.{}f}\n"_f(std::numbers::pi_v<double>, n);
+// }
