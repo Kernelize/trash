@@ -11,6 +11,6 @@ sudo ninja -C build install
 2. build the project
 ```bash
 mkdir build
-cd build
-cmake -DCMAKE_CXX_COMPILER=/opt/llvm/bin/clang++ -DCMAKE_C_COMPILER=/opt/llvm/bin/clang
+cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=/opt/llvm/bin/clang++ -DCMAKE_C_COMPILER=/opt/llvm/bin/clang
+cmake --build build
 ```

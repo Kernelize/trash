@@ -1,11 +1,12 @@
 import std;
 
+template <typename T, typename... Ts>
+auto appendToTuple(const std::tuple<Ts...>& t, const T& item) {
+  return std::tuple_cat(t, std::make_tuple(item));
+}
+
 auto main() -> int {
-  std::println("Hello, world!");
-  auto v = std::views::iota(0, 10) |
-           std::views::transform([](auto x) { return x * x; }) |
-           std::ranges::to<std::vector<int>>();
-  for (auto x : v) {
-    std::println("{}", x);
-  }
+  auto v = std::make_tuple(1, 2, 3);
+  auto v2 = appendToTuple(v, 'c');
+  std::println("{}", v2);
 }
