@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <any.hpp>
 #include <array>
+#include <cstdio>
 #include <matchit.hpp>
 #include <print>
 #include <stdexcept>
@@ -110,4 +111,11 @@ void test4() {
 
   auto vec = std::vector{hfoo2{1, 2}};
   auto vec2 = vec | views::all | views::reverse | ranges::to<std::vector>();
+}
+
+void test5() {
+  auto a = std::vector{1, 2, 3};
+  for (int i = 0; i < a.size(); i++) {
+    std::printf("%d\n", a[i]);
+  }
 }

@@ -1,0 +1,21 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "/Users/hank/Development/trash/cmt/build",
+	"dir-cur-src" : "/Users/hank/Development/trash/cmt",
+	"dir-top-bld" : "/Users/hank/Development/trash/cmt/build",
+	"dir-top-src" : "/Users/hank/Development/trash/cmt",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : 
+	[
+		"/Users/hank/Development/trash/cmt/build/CMakeFiles/std.dir"
+	],
+	"module-dir" : "/Users/hank/Development/trash/cmt/build/CMakeFiles/main.dir"
+}

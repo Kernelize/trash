@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/hank/Development/trash/cmt/build",
+  "command": "/opt/llvm/bin/clang++ -std=c++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -stdlib=libc++ -Wno-reserved-module-identifier -Wno-reserved-user-defined-literal @CMakeFiles/std.dir/_deps/std_module-src/std.cppm.o.modmap -o CMakeFiles/std.dir/_deps/std_module-src/std.cppm.o -c /Users/hank/Development/trash/cmt/build/_deps/std_module-src/std.cppm",
+  "file": "/Users/hank/Development/trash/cmt/build/_deps/std_module-src/std.cppm",
+  "output": "CMakeFiles/std.dir/_deps/std_module-src/std.cppm.o"
+},
+{
+  "directory": "/Users/hank/Development/trash/cmt/build",
+  "command": "/opt/llvm/bin/clang++ -std=c++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -stdlib=libc++ -Wno-reserved-module-identifier -Wno-reserved-user-defined-literal @CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o.modmap -o CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o -c /Users/hank/Development/trash/cmt/build/_deps/std_module-src/std.compat.cppm",
+  "file": "/Users/hank/Development/trash/cmt/build/_deps/std_module-src/std.compat.cppm",
+  "output": "CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o"
+},
+{
+  "directory": "/Users/hank/Development/trash/cmt/build",
+  "command": "/opt/llvm/bin/clang++ -std=c++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -stdlib=libc++ -Wno-reserved-module-identifier -Wno-reserved-user-defined-literal @CMakeFiles/main.dir/main.cpp.o.modmap -o CMakeFiles/main.dir/main.cpp.o -c /Users/hank/Development/trash/cmt/main.cpp",
+  "file": "/Users/hank/Development/trash/cmt/main.cpp",
+  "output": "CMakeFiles/main.dir/main.cpp.o"
+}
+]

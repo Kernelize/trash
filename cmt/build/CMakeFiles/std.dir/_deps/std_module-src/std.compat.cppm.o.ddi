@@ -1,0 +1,21 @@
+{
+  "revision": 0,
+  "rules": [
+    {
+      "primary-output": "CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o",
+      "provides": [
+        {
+          "is-interface": true,
+          "logical-name": "std.compat",
+          "source-path": "/Users/hank/Development/trash/cmt/build/_deps/std_module-src/std.compat.cppm"
+        }
+      ],
+      "requires": [
+        {
+          "logical-name": "std"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

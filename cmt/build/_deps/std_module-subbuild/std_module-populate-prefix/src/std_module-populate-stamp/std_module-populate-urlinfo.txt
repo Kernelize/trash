@@ -1,0 +1,11 @@
+# This is a generated file and its contents are an internal implementation detail.
+# The download step will be re-executed if anything in this file changes.
+# No other meaning or use of this file is supported.
+
+method=url
+command=/opt/homebrew/Cellar/cmake/3.28.2/bin/cmake;-E;rm;-rf;/Users/hank/Development/trash/cmt/build/_deps/std_module-src;COMMAND;/opt/homebrew/Cellar/cmake/3.28.2/bin/cmake;-E;copy_directory;/opt/llvm/share/libc++/v1;/Users/hank/Development/trash/cmt/build/_deps/std_module-src
+source_dir=/Users/hank/Development/trash/cmt/build/_deps/std_module-src
+work_dir=/Users/hank/Development/trash/cmt/build/_deps
+url(s)=/opt/llvm/bin/../share/libc++/v1
+hash=
+

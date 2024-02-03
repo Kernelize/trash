@@ -1,0 +1,18 @@
+# ninja log v5
+1760	1801	1706941653805384831	main	e74ce0a80d2ac458
+1447	1760	1706941653765199654	CMakeFiles/main.dir/main.cpp.o	996e339eb99f4287
+1553	1578	1706941653584382000	libstd.a	30cc30bf9ad9666a
+1447	1553	1706941653557873170	CMakeFiles/std.dir/std.compat.pcm	80f315e0ad3ee9ba
+86	1442	1706941653446765645	CMakeFiles/std.dir/std.pcm	1f7692df2c60cb3
+78	85	1706941652091537385	CMakeFiles/std.dir/CXX.dd	50382aefff022d15
+86	94	1706941652099572520	/Users/hank/Development/trash/cmt/build/CMakeFiles/main.dir/CXXModules.json	5675002ffb47aeb4
+1447	1553	1706941653557873170	CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o	80f315e0ad3ee9ba
+86	1442	1706941653446765645	CMakeFiles/std.dir/_deps/std_module-src/std.cppm.o	1f7692df2c60cb3
+86	94	1706941652099572520	CMakeFiles/main.dir/CXX.dd	5675002ffb47aeb4
+78	85	1706941652091537385	CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o.modmap	50382aefff022d15
+86	94	1706941652099572520	CMakeFiles/main.dir/main.cpp.o.modmap	5675002ffb47aeb4
+78	85	1706941652091537385	/Users/hank/Development/trash/cmt/build/CMakeFiles/std.dir/CXXModules.json	50382aefff022d15
+1	78	1706941652081461633	CMakeFiles/std.dir/_deps/std_module-src/std.cppm.o.ddi	a1cf8a418f0c4fe8
+78	85	1706941652091537385	CMakeFiles/std.dir/_deps/std_module-src/std.cppm.o.modmap	50382aefff022d15
+1	35	1706941652039047048	CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o.ddi	ca44846544c19aa9
+1	22	1706941652025512101	CMakeFiles/main.dir/main.cpp.o.ddi	2721ed71dea9a4c3

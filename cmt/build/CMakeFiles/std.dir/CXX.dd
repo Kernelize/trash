@@ -1,0 +1,7 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/std.dir/_deps/std_module-src/std.cppm.o | CMakeFiles/std.dir/std.pcm: dyndep
+  restat = 1
+
+build CMakeFiles/std.dir/_deps/std_module-src/std.compat.cppm.o | CMakeFiles/std.dir/std.compat.pcm: dyndep | CMakeFiles/std.dir/std.pcm
+  restat = 1
+

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/CMakeFiles/std_module-populate"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/CMakeFiles/std_module-populate.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/CMakeFiles/std_module-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-build.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-download.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-install.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-test.rule"
+		},
+		{
+			"file" : "/Users/hank/Library/Mobile Documents/com~apple~CloudDocs/Development/trash/cmt/build/_deps/std_module-subbuild/std_module-populate-prefix/src/std_module-populate-stamp/std_module-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"std_module-populate"
+		],
+		"name" : "std_module-populate"
+	}
+}

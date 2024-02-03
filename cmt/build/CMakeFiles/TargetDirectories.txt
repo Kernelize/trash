@@ -1,0 +1,4 @@
+/Users/hank/Development/trash/cmt/build/CMakeFiles/std.dir
+/Users/hank/Development/trash/cmt/build/CMakeFiles/main.dir
+/Users/hank/Development/trash/cmt/build/CMakeFiles/edit_cache.dir
+/Users/hank/Development/trash/cmt/build/CMakeFiles/rebuild_cache.dir
