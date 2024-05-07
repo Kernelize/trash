@@ -203,10 +203,10 @@ void shiihf() { auto v = vector{2, 3, 4}; }
 template <typename...>
 struct type_seq {};
 
-template <typename... Ts>
-auto f(Ts...[0] arg, type_seq<Ts...>) {
-  return arg;
-}
+// template <typename... Ts>
+// auto f(Ts...[0] arg, type_seq<Ts...>) {
+//   return arg;
+// }
 
 constexpr auto size(auto... Is) {
   std::vector<int> v = {Is...};
