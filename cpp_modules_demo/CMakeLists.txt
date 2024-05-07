@@ -53,14 +53,30 @@ add_library(shits
   STATIC
 )
 
+add_library(shits2
+  STATIC
+  src/aiopptest.cpp
+  src/spdlogger.cpp
+)
+
+target_link_libraries(shits2
+  PUBLIC
+  aiopp
+)
+
 target_sources(shits
     PUBLIC
-    FILE_SET all_my_modules TYPE CXX_MODULES FILES
+    FILE_SET shit_modules TYPE CXX_MODULES FILES
     src/shits.cppm
     src/cotest.cppm
 )
 
 target_include_directories(shits
+  PUBLIC
+  include
+)
+
+target_include_directories(shits2
   PUBLIC
   include
 )
@@ -73,5 +89,10 @@ add_executable(cobin
   apps/cobin.cpp
 )
 
-target_link_libraries(main PUBLIC shits)
-target_link_libraries(cobin PUBLIC shits)
+add_executable(aioppmain
+  apps/aioppmain.cpp
+)
+
+target_link_libraries(main PUBLIC shits shits2)
+target_link_libraries(cobin PUBLIC shits shits2)
+target_link_libraries(aioppmain PUBLIC shits shits2)
