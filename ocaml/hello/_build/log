@@ -1,4 +1,4 @@
-# dune exec hello
+# dune utop
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Shared cache location: /Users/hank/.cache/dune/db
@@ -13,4 +13,4 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /Users/hank/.opam/default/bin/ocamlc.opt -config > /var/folders/92/y_7clwd112g8qw92mvdyg8880000gn/T/dune_4e6a03_output
+$ /Users/hank/.opam/default/bin/ocamlc.opt -config > /var/folders/92/y_7clwd112g8qw92mvdyg8880000gn/T/dune_f7a991_output

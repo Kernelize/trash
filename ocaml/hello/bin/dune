@@ -1,4 +1,10 @@
 (executable
  (public_name hello)
  (name main)
- (libraries hello))
+ (libraries hello)
+ )
+
+(env
+ (dev
+  (flags (:standard -w -a))))
+
