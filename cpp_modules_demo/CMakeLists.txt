@@ -81,6 +81,18 @@ target_include_directories(shits2
   include
 )
 
+add_library(myMath
+  STATIC
+)
+
+target_sources(myMath
+    PUBLIC
+    FILE_SET shit_modules TYPE CXX_MODULES FILES
+    src/myMath.cppm
+    src/myMathAlgebra.cppm
+    src/myMathGeometry.cppm
+)
+
 add_executable(main
   apps/main.cpp
 )
@@ -93,6 +105,13 @@ add_executable(aioppmain
   apps/aioppmain.cpp
 )
 
+add_executable(mathapp
+  apps/mathapp.cpp
+)
+
+target_link_libraries(mathapp PUBLIC myMath)
+
 target_link_libraries(main PUBLIC shits shits2)
 target_link_libraries(cobin PUBLIC shits shits2)
 target_link_libraries(aioppmain PUBLIC shits shits2)
+

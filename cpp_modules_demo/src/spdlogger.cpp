@@ -19,6 +19,6 @@ spdlog::level::level_enum mapSeverity(aiopp::LogSeverity severity) {
 }
 } // namespace
 
-void SpdLogger::log(aiopp::LogSeverity severity, const std::string &message) {
+void spd::SpdLogger::log(aiopp::LogSeverity severity, const std::string &message) {
   spdlog::log(mapSeverity(severity), message);
 }

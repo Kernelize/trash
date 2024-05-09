@@ -47,7 +47,7 @@ private:
 };
 
 int server_test() {
-  setLogger(std::make_unique<SpdLogger>());
+  setLogger(std::make_unique<spd::SpdLogger>());
 
   auto socket =
       createSocket(SocketType::Udp, IpAddress::parse("0.0.0.0").value(), 4242);
