@@ -81,11 +81,30 @@ module type Queue = sig
       front to back. *)
 end
 
-module BatchedQueue : Queue = struct
-  type 'a t = { o : 'a list; i : 'a list }
+(* module BatchedQueue : Queue = struct *)
+(*   type 'a t = { o : 'a list; i : 'a list } *)
+(**)
+(*   exception Empty *)
+(**)
+(*   let empty = { o = []; i = [] } *)
+(*   let is_empty = function { o = [] } -> true | _ -> false *)
+(* end *)
 
-  exception Empty
+type vec = float array
 
-  let empty = { o = []; i = [] }
-  let is_empty = function { o = [] } -> true | _ -> false
-end
+let vec_print v =
+  for i = 0 to Array.length v - 1 do
+    print_float v.(i);
+    print_newline ()
+  done
+
+let vec_print' v = Array.iter (Printf.printf "%f\n") v
+let v = [| 1.; 0. |]
+let _ = v.(1) <- 2.
+
+let vec_add v1 v2 =
+  let len1, len2 = (Array.length v1, Array.length v2) in
+  if len1 <> len2 then invalid_arg "different lengths"
+  else Array.init len1 (fun x -> v1.(x) + v2.(x))
+
+let vec_add' v1 v2 = Array.map2 ( +. ) v1 v2
