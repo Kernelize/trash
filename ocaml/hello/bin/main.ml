@@ -108,3 +108,7 @@ let vec_add v1 v2 =
   else Array.init len1 (fun x -> v1.(x) + v2.(x))
 
 let vec_add' v1 v2 = Array.map2 ( +. ) v1 v2
+
+type 'a my_list =
+  | Nil
+  | Cons of 'a * 'a my_list

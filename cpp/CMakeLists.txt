@@ -23,8 +23,8 @@ target_include_directories(shitslib
   include
 )
 
-add_executable(shits
+add_executable(main
   apps/main.cpp
 )
 
-target_link_libraries(shits PUBLIC shitslib)
+target_link_libraries(main PUBLIC shitslib)
