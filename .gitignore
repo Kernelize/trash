@@ -2,3 +2,5 @@ cpp/build
 build
 .cache
 _build
+.lake
+.DS_Store
