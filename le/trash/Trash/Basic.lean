@@ -119,15 +119,16 @@ def distribute (α β γ : Type) (x : α × (β ⊕ γ)) : (α × β) ⊕ (α ×
   | (a, Sum.inl b) => Sum.inl (a, b)
   | (a, Sum.inr c) => Sum.inr (a, c)
 
-def distribute2 {α β γ : Type} : (x : α × (β ⊕ γ)) → (α × β) ⊕ (α × γ)
+def distribute2 {α β γ : Type} : α × (β ⊕ γ) → (α × β) ⊕ (α × γ)
   | (a, Sum.inl b) => Sum.inl (a, b)
   | (a, Sum.inr c) => Sum.inr (a, c)
 
-def zip {α β : Type} (xs : List α) (ys : List β) : List (α × β) :=
-  match xs, ys with
-  | [], _ => []
-  | _, [] => []
-  | x::xs, y::ys => (x, y) :: zip xs ys
+#check distribute2
+
+/- def zip {α β : Type} : (List α × List β) → List (α × β) -/
+/-   | [], _ => [] -/
+/-   | _, [] => [] -/
+/-   | x::xs, y::ys => (x, y) :: zip xs ys -/
 
 def Prod.swap {α β : Type} (pair : α × β) : β × α :=
   match pair with
@@ -155,7 +156,7 @@ def Prod.swap2 {α β : Type} : α × β → β × α
 def unzip {α β : Type}: List (α × β) → List α × List β
   | [] => ([], [])
   | (x, y) :: xys =>
-    let unzipped : List α × List β := unzip xys
+    let unzipped := unzip xys
     (x :: unzipped.fst, y :: unzipped.snd)
 
 #check λ x => x + 1
@@ -169,4 +170,13 @@ def triple (x : Nat) : Nat := 3 * x
 def quadruple (x : Nat) : Nat := 2 * x + 2 * x
 end NewNamespace
 
+/- inductive PosNat : Type -/
+/- | mk : ∀ (n : ℕ), n > 0 → PosNat -/
+
+
+def positive_nat := {n : Nat // n > 0}
+#eval (⟨1, Nat.zero_lt_succ 0⟩ : positive_nat)
+
+
+/- #eval (⟨0, Nat.zero_lt_succ 0⟩ : positive_nat) -/
 

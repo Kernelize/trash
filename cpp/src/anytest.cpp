@@ -48,3 +48,27 @@ auto anytest1() -> void {
   // name = Tom
   // age = 18
 }
+
+struct AnyType {
+  template<typename T>
+  operator T();
+};
+
+template<typename T>
+consteval size_t CountMember(auto&&... Args) {
+  if constexpr (!requires{T{Args...};}) {
+    return sizeof...(Args) - 1;
+  } else {
+    return CountMember<T>(Args..., AnyType{});
+  }
+}
+
+struct MyStruct {
+  int x;
+  int y;
+  int z;
+};
+
+void ff() {
+  std::cout << CountMember<MyStruct>();
+}

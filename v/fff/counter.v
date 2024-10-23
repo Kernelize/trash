@@ -4,7 +4,7 @@ module counter(out, clk, reset);
   output [WIDTH-1 : 0] out;
   input clk, reset;
 
-  reg [WIDTH-1 : 0] out;
+  reg [WIDTH - 1 : 0] out;
   wire clk, reset;
   always @(posedge clk or posedge reset)
     if (reset)
