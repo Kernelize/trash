@@ -199,31 +199,10 @@ def runActions : List (IO Unit) -> IO Unit
     act
     runActions actions
 
-/- #eval (⟨0, Nat.zero_lt_succ 0⟩ : positive_nat) -/
+#eval runActions (countdown 3)
 
-def loo : IO Unit := do
-  let mut sum := 0
-  for i in List.range 101 do
-    sum := sum + i
-  IO.println sum
-
-/- inductive Vec : Nat → Type → Type -/
-/-   | nil : Vec 0 α -/
-/-   | cons : ∀ {n : Nat} (a : α) (v : Vec n α), Vec (Nat.succ n) α -/
-
-def natOrStringThree (b : Bool) : if b then Nat else String :=
-  match b with
-  | true => (3 : Nat)
-  | false => "three"
-
-def readBool : IO Bool := do
-let stdin ← IO.getStdin
-let input ← stdin.getLine
-  return match input.trim with
-    | "true" => true
-    | _ => false
-
-/- def main : IO Unit := do -/
-/-   let b ← readBool -/
-/-   let result : if b then Nat else String := natOrStringThree b -/
-/-   IO.println result -/
+def main1 : IO Unit := do
+  let (stdin, stdout) ← Prod.mk <$> IO.getStdin <*> IO.getStdout
+  stdout.putStrLn "How would you like to be addressed?"
+  let name := (← stdin.getLine).trim
+  stdout.putStrLn s!"Hello, {name}"
