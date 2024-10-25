@@ -1,0 +1,113 @@
+ARM GAS  /var/folders/92/y_7clwd112g8qw92mvdyg8880000gn/T//cc7TkGeX.s 			page 1
+
+
+   1              	# 0 "Project_Settings/Startup_Code/startup.S"
+   2              	# 1 "/Users/hank/Development/trash/kl25z//"
+   1              	...
+   0              	
+   0              	
+   1              	/********************************************************************************
+   2              	  * \file      startup.s
+   3              	  * \brief     Startup file for Kinetis L (KL25Z).
+   4              	  *            This module performs:
+   5              	  *                - Set the initial SP
+   6              	  *                - Set the initial PC == __thumb_startup,
+   7              	  *                - Branches to main in the C library (which eventually
+   8              	  *                  calls main()).
+   9              	  ******************************************************************************/
+  10              	  .syntax unified
+  11              	  .cpu cortex-m0
+  12              	  .fpu softvfp
+  13              	  .thumb
+  14              	 
+  15              	.global g_pfnVectors
+  16              	.global Default_Handler
+  17              	 
+  18              	/* start address for the initialization values of the .data section. defined in linker script */
+  19 0000 00000000 	.word ___ROM_AT
+  20              	/* start address for the .data section. defined in linker script */ 
+  21 0004 00000000 	.word _sdata
+  22              	/* end address for the .data section. defined in linker script */
+  23 0008 00000000 	.word _edata
+  24              	/* start address for the .bss section. defined in linker script */
+  25 000c 00000000 	.word __START_BSS
+  26              	/* end address for the .bss section. defined in linker script */
+  27 0010 00000000 	.word __END_BSS
+  28              	 
+  29              	/**
+  30              	 * \brief  This is the code that gets called when the processor first
+  31              	 *          starts execution following a reset event. Only the absolutely
+  32              	 *          necessary set is performed, after which the application
+  33              	 *          supplied main() routine is called.
+  34              	 * \param  None
+  35              	 * \retval : None
+  36              	*/
+  37              	  .section .text.__thumb_startup
+  38              	  .weak __thumb_startup
+  39              	  .type __thumb_startup, %function
+  40              	__thumb_startup:
+  41              	/* Copy the data segment initializers from flash to SRAM: */ 
+  42 0000 0021     	  movs r1, #0
+  43 0002 03E0     	  b LoopCopyDataInit
+  44              	 
+  45              	CopyDataInit:
+  46 0004 0A4B     	  ldr r3, =___ROM_AT
+  47 0006 5B58     	  ldr r3, [r3, r1]
+  48 0008 4350     	  str r3, [r0, r1]
+  49 000a 0431     	  adds r1, r1, #4
+  50              	 
+  51              	LoopCopyDataInit:
+  52 000c 0948     	  ldr r0, =_sdata
+ARM GAS  /var/folders/92/y_7clwd112g8qw92mvdyg8880000gn/T//cc7TkGeX.s 			page 2
+
+
+  53 000e 0A4B     	  ldr r3, =_edata
+  54 0010 4218     	  adds r2, r0, r1
+  55 0012 9A42     	  cmp r2, r3
+  56 0014 F6D3     	  bcc CopyDataInit
+  57 0016 094A     	  ldr r2, =__START_BSS
+  58 0018 02E0     	  b LoopFillZerobss
+  59              	
+  60              	/* Zero fill the bss segment: */ 
+  61              	FillZerobss:
+  62 001a 0023     	  movs r3, #0
+  63 001c 1360     	  str r3, [r2]
+  64 001e 0432     	  adds r2, r2, #4
+  65              	 
+  66              	LoopFillZerobss:
+  67 0020 074B     	  ldr r3, = __END_BSS
+  68 0022 9A42     	  cmp r2, r3
+  69 0024 F9D3     	  bcc FillZerobss
+  70              	/* Call the clock system intitialization function: */
+  71 0026 FFF7FEFF 	  bl  __init_hardware
+  72              	/* Call the application's entry point: */
+  73 002a FFF7FEFF 	  bl main
+  74 002e 7047     	  bx lr
+  75 0030 00000000 	.size __thumb_startup, .-__thumb_startup
+  75      00000000 
+  75      00000000 
+  75      00000000 
+  75      00000000 
+ARM GAS  /var/folders/92/y_7clwd112g8qw92mvdyg8880000gn/T//cc7TkGeX.s 			page 3
+
+
+DEFINED SYMBOLS
+Project_Settings/Startup_Code/startup.S:40     .text.__thumb_startup:00000000 __thumb_startup
+Project_Settings/Startup_Code/startup.S:42     .text.__thumb_startup:00000000 $t
+Project_Settings/Startup_Code/startup.S:51     .text.__thumb_startup:0000000c LoopCopyDataInit
+Project_Settings/Startup_Code/startup.S:45     .text.__thumb_startup:00000004 CopyDataInit
+Project_Settings/Startup_Code/startup.S:66     .text.__thumb_startup:00000020 LoopFillZerobss
+Project_Settings/Startup_Code/startup.S:61     .text.__thumb_startup:0000001a FillZerobss
+Project_Settings/Startup_Code/startup.S:75     .text.__thumb_startup:00000030 $d
+                            .text:00000000 $d
+
+UNDEFINED SYMBOLS
+g_pfnVectors
+Default_Handler
+___ROM_AT
+_sdata
+_edata
+__START_BSS
+__END_BSS
+__init_hardware
+main
