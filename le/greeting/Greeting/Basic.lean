@@ -206,3 +206,107 @@ def main1 : IO Unit := do
   stdout.putStrLn "How would you like to be addressed?"
   let name := (← stdin.getLine).trim
   stdout.putStrLn s!"Hello, {name}"
+
+theorem onePlusOneIsTwo : 1 + 1 = 2 := rfl
+
+theorem onePlusOneIsTwo' : 1 + 1 = 2 := by
+  simp
+
+def woodlandCritters : List String :=
+  ["hedgehog", "deer", "snail"]
+
+/- def oops := woodlandCritters[3] -/
+
+#eval woodlandCritters[3]!
+
+/- theorem addAndAppend : 1 + 1 = 2 ∧ "Str".append "ing" = "String" := by simp -/
+
+/- def unsafeThird { α : Type } (xs : List α) : α := xs[2] -/
+
+def third { α : Type } (xs : List α) (ok : xs.length > 2) : α := xs[2]
+
+class Plus (α : Type) where
+  plus : α → α → α
+
+instance : Plus Nat where
+  plus := Nat.add
+
+inductive Pos : Type where
+  | one : Pos
+  | succ : Pos → Pos
+deriving Repr
+
+def Pos.plus : Pos → Pos → Pos
+  | Pos.one, k => Pos.succ k
+  | Pos.succ n, k => Pos.succ (n.plus k)
+
+instance : Plus Pos where
+  plus := Pos.plus
+
+
+instance : Add Pos where
+  add := Pos.plus
+
+instance : OfNat Pos (n + 1) where
+  ofNat :=
+    let rec natPlusOne : Nat → Pos
+      | 0 => Pos.one
+      | k + 1 => Pos.succ (natPlusOne k)
+    natPlusOne n
+
+def Pos.toNat : Pos → Nat
+  | Pos.one => 1
+  | Pos.succ n => n.toNat + 1
+
+instance : ToString Pos where
+  toString := toString ∘ Pos.toNat
+
+def addNatPos : Nat -> Pos -> Pos
+  | 0, p => p
+  | n + 1, p => Pos.succ (addNatPos n p)
+
+def addPosNat : Pos -> Nat -> Pos
+  | p, 0 => p
+  | p, n + 1 => Pos.succ (addPosNat p n)
+
+instance : HAdd Nat Pos Pos where
+  hAdd := addNatPos
+
+instance : HAdd Pos Nat Pos where
+  hAdd := addPosNat
+
+#eval (3 : Pos) + (5 : Nat)
+
+#check @OfNat.ofNat
+
+def a := [1, 2, 3]
+
+/- def b := a[3] -/
+
+def eight : Pos := 8
+#eval ((OfNat.ofNat 3) : Pos)
+#eval eight
+
+class HPlus (α : Type) (β : Type) (γ : outParam Type) where
+  hPlus : α → β → γ
+
+instance : HPlus Nat Pos Pos where
+  hPlus := addNatPos
+
+instance : HPlus Pos Nat Pos where
+  hPlus := addPosNat
+
+@[default_instance]
+instance {α : Type} [Add α] : HPlus α α α where
+  hPlus := Add.add
+
+#check ((HPlus.hPlus (5 : Nat)) : Pos → Pos)
+
+instance {α : Type} [Mul α] : HMul (PPoint α) α (PPoint α) where
+  hMul p n := { x := p.x * n, y := p.y * n }
+
+#eval (PPoint.mk 3 4) * 2
+
+example (n : Nat) (k : Nat) : Bool :=
+  n + k == k + n
+

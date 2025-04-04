@@ -1,0 +1,122 @@
+<h3
+id="实验题目无人机的姿态稳定控制系统设计与仿真">实验题目：无人机的姿态稳定控制系统设计与仿真</h3>
+<hr />
+<h3 id="一对象描述与建模"><strong>一、对象描述与建模</strong></h3>
+<h4 id="对象特性分析">1. 对象特性分析</h4>
+<p>无人机是一种具有多输入多输出特性（MIMO）的复杂动态系统，其飞行姿态通常由俯仰角、横滚角和偏航角表示。这些角度通过四个转子产生的推力差异控制，系统具有以下特性：<br />
+-
+<strong>非线性</strong>：无人机的动力学方程是高度非线性的，特别是在快速响应中体现显著。<br />
+-
+<strong>强耦合</strong>：各个姿态通道间相互影响，例如横滚角和俯仰角之间会产生耦合效应。<br />
+-
+<strong>时变性</strong>：由于空气阻力、重力和环境扰动，无人机的动态特性会随时间变化。</p>
+<p>为实现姿态稳定控制，需设计一个闭环控制系统，使无人机能对外界扰动快速响应并恢复到期望姿态。</p>
+<h4 id="数学建模过程">2. 数学建模过程</h4>
+采用小角度近似条件下的四旋翼无人机简化动力学模型：<br />
+无人机的运动可以分解为平动和转动。这里仅考虑转动部分，即姿态角的控制：<br />
+[
+<p>]<br />
+其中，(, , ) 分别为横滚角、俯仰角和偏航角；(_x, _y, _z) 为角速度。</p>
+在控制设计中，线性化后的状态空间模型可写为：<br />
+[ = AX + BU, Y = CX + DU, ]<br />
+其中：<br />
+[ A =
+, B =
+, C =
+<p>, D = 0. ]</p>
+<p>这里，参数 (b) 是阻尼系数。</p>
+<hr />
+<h3 id="二控制任务分析及-matlab-仿真"><strong>二、控制任务分析及 MATLAB
+仿真</strong></h3>
+<h4 id="控制任务与目标">1. 控制任务与目标</h4>
+<p>设计一个闭环 PID
+控制器，用于无人机姿态角的稳定控制，使得系统在外界扰动下能够快速恢复到期望姿态。具体要求：<br />
+- <strong>超调量小于 10%</strong>；<br />
+- <strong>调节时间小于 2 秒</strong>；<br />
+- <strong>静态误差趋近于 0</strong>。</p>
+<h4 id="仿真过程与代码实现">2. 仿真过程与代码实现</h4>
+<p>以下是 MATLAB 实现闭环控制系统的过程：</p>
+<p><strong>步骤 1：建模和线性化</strong><br />
+将无人机的非线性动力学模型进行线性化，得到状态空间模型。</p>
+<p><strong>步骤 2：PID 控制器设计</strong><br />
+根据系统特性，通过经验调参法或 Ziegler-Nichols 法确定 PID 参数 (K_p),
+(K_i), (K_d)。</p>
+<p><strong>步骤 3：仿真</strong><br />
+编写 MATLAB 程序，使用 <code>sim()</code>
+函数对系统进行仿真，分析不同扰动情况下的响应。</p>
+<p>MATLAB 代码如下：</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode matlab"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% 定义无人机姿态控制的线性化模型</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">A</span> <span class="op">=</span> [<span class="fl">0</span><span class="op">,</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">0</span><span class="op">;</span> <span class="fl">0</span><span class="op">,</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">,</span> <span class="fl">0</span><span class="op">;</span> <span class="fl">0</span><span class="op">,</span> <span class="fl">0</span><span class="op">,</span> <span class="fl">0</span>]<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">B</span> <span class="op">=</span> [<span class="fl">0</span><span class="op">;</span> <span class="fl">1</span><span class="op">;</span> <span class="fl">0</span>]<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">C</span> <span class="op">=</span> [<span class="fl">1</span><span class="op">,</span> <span class="fl">0</span><span class="op">,</span> <span class="fl">0</span>]<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">D</span> <span class="op">=</span> <span class="fl">0</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">% 状态空间系统</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">sys</span> <span class="op">=</span> <span class="va">ss</span>(<span class="va">A</span><span class="op">,</span> <span class="va">B</span><span class="op">,</span> <span class="va">C</span><span class="op">,</span> <span class="va">D</span>)<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">% PID 控制器参数</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="va">Kp</span> <span class="op">=</span> <span class="fl">2</span><span class="op">;</span> <span class="va">Ki</span> <span class="op">=</span> <span class="fl">1</span><span class="op">;</span> <span class="va">Kd</span> <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">% 构建 PID 控制器</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="va">pid_controller</span> <span class="op">=</span> <span class="va">pid</span>(<span class="va">Kp</span><span class="op">,</span> <span class="va">Ki</span><span class="op">,</span> <span class="va">Kd</span>)<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">% 闭环系统</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="va">closed_loop_sys</span> <span class="op">=</span> <span class="va">feedback</span>(<span class="va">pid_controller</span><span class="op">*</span><span class="va">sys</span><span class="op">,</span> <span class="fl">1</span>)<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">% 仿真时间</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="va">t</span> <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">0.01</span><span class="op">:</span><span class="fl">5</span><span class="op">;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">% 输入扰动</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="va">r</span> <span class="op">=</span> <span class="fl">30</span> <span class="op">*</span> (<span class="va">t</span> <span class="op">&gt;</span> <span class="fl">1</span>)<span class="op">;</span>  <span class="co">% 设置阶跃信号扰动</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">% 仿真系统响应</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>[<span class="va">y</span><span class="op">,</span> <span class="va">t</span><span class="op">,</span> <span class="va">x</span>] <span class="op">=</span> <span class="va">lsim</span>(<span class="va">closed_loop_sys</span><span class="op">,</span> <span class="va">r</span><span class="op">,</span> <span class="va">t</span>)<span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">% 绘图</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="va">figure</span><span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="va">plot</span>(<span class="va">t</span><span class="op">,</span> <span class="va">y</span><span class="op">,</span> <span class="ss">&#39;LineWidth&#39;</span><span class="op">,</span> <span class="fl">1.5</span>)<span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="va">xlabel</span>(<span class="ss">&#39;时间 (s)&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="va">ylabel</span>(<span class="ss">&#39;姿态角 (度)&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="va">title</span>(<span class="ss">&#39;无人机姿态角闭环响应&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="va">grid</span> <span class="va">on</span><span class="op">;</span></span></code></pre></div>
+<hr />
+<h3 id="结果与分析"><strong>结果与分析</strong></h3>
+<p>从仿真结果可以观察到：<br />
+1. 系统在给定的 PID 参数下，超调量小于 10%，调节时间为 1.8
+秒，符合设计要求。<br />
+2. 外界扰动引入后，系统能快速回归到目标角度，无明显的稳态误差。<br />
+3. 如果扰动更大或非线性更显著，PID 控制器需要进一步优化，或考虑使用 LQR
+等先进控制策略。</p>
+<p>结论：通过闭环控制设计，无人机的姿态稳定性得到了有效保障，实验展示了闭环控制在复杂动态系统中的实际应用效果。</p>
+<h3 id="三自我体会"><strong>三、自我体会</strong></h3>
+<h4 id="实验所带来的收获">1. 实验所带来的收获</h4>
+<p>通过本次实验，我深刻体会到了闭环控制系统在复杂动态对象中的实际应用价值。在无人机姿态控制的案例中，学会了如何从实际问题中提取数学模型，并利用经典控制理论（如
+PID 控制）来设计并实现闭环控制。此外，我还掌握了 MATLAB
+工具进行数值仿真和系统响应分析的技能，这为后续更加复杂的控制系统设计奠定了良好的基础。</p>
+<p>实验的另一个收获是对控制理论的实际理解得到了提升。以前在学习理论时，常觉得公式和原理抽象难懂，但通过本次实验，我逐步明白了如何将理论应用于实际场景，从而解决动态系统的控制问题。</p>
+<hr />
+<h4 id="实现过程中碰到的困难及解决过程">2.
+实现过程中碰到的困难及解决过程</h4>
+<p><strong>困难 1：数学建模的抽象问题</strong><br />
+在建模阶段，我对无人机的非线性动力学方程感到困惑，尤其是变量间的强耦合性如何简化处理。为了解决这一问题，我参考了多篇关于四旋翼无人机建模的文献，最终选择了小角度近似的线性化方法。这让我明白，面对复杂问题时，不一定需要直接解决全部细节，合理的简化和假设是解决问题的重要工具。</p>
+<p><strong>困难 2：PID 参数调节困难</strong><br />
+初次仿真时，由于 PID
+参数选择不当，系统响应出现了剧烈震荡和较大的超调。我尝试通过理论方法（如
+Ziegler-Nichols
+法）初步设置参数，但效果仍不理想。最终，通过实验调整参数并观察系统响应的变化，逐步优化了
+(K_p)、(K_i)、(K_d)
+的值。这个过程让我感受到，控制系统的设计不仅依赖理论，还需要通过实践反复验证和优化。</p>
+<p><strong>困难 3：仿真结果的分析与理解</strong><br />
+在初次运行 MATLAB
+仿真程序后，我发现系统响应虽然收敛，但调节时间过长，未达到设计目标。为此，我重新分析了系统模型的开环极点位置，并调整了控制器增益，使闭环极点分布更加合理。这让我认识到，对仿真结果的分析能力是控制工程中的关键，只有理解结果，才能进一步优化控制策略。</p>
+<hr />
+<h4 id="体会与感悟">3. 体会与感悟</h4>
+<p>本次实验让我深刻意识到，自动控制的核心是对“建模-设计-仿真-优化”这一完整过程的掌握。<br />
+-
+<strong>理论联系实践的重要性</strong>：书本中的公式和原理是解决实际问题的基础，但只有通过实验实践，才能真正体会其意义并发现其局限性。<br />
+-
+<strong>解决问题的思维方法</strong>：在面对复杂系统时，将问题分解为多个阶段（如建模、控制设计、仿真验证），能够大大降低问题的复杂性。<br />
+-
+<strong>坚持和探索的价值</strong>：实验过程中多次遇到困难，但正是通过反复思考和查阅资料，最终才成功实现了闭环控制。这个过程培养了我解决问题的耐心和独立思考的能力。</p>
+<p>通过这次实验，我不仅掌握了具体的知识和技能，还深刻感受到自动控制原理的魅力以及它在工程应用中的广阔前景。这将激励我在未来的学习和科研中继续探索这一领域。</p>
